@@ -24,6 +24,7 @@ const upload = multer({ storage });
 
 // Routes
 router.post("/login", loginUser);
+router.post("/", upload.single("profile"), createUser);
 router.post("/register", upload.single("profile"), createUser);
 router.put("/:id", upload.single("profile"), updateUser);
 router.delete("/:id", deleteUser);
@@ -31,3 +32,5 @@ router.get("/:id", getUserById);
 router.get("/", getUsers);
 
 module.exports = router;
+
+
