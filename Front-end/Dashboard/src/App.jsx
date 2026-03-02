@@ -1,4 +1,3 @@
-import Navbar from './components/Navbar';
 import Dashboard from './page/Dashboard';
 import { Routes, Route, } from "react-router-dom";
 import Users from './page/Users';

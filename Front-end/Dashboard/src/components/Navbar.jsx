@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_URL } from "../API/config";
 
+const FALLBACK_AVATAR = "https://ui-avatars.com/api/?name=Admin&background=4f46e5&color=fff";
+
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [currentUser, setCurrentUser] = useState(() => {
@@ -66,7 +68,7 @@ function Navbar() {
 
     const resolveAvatarSrc = () => {
         const raw = currentUser?.profile;
-        if (!raw) return profile;
+        if (!raw) return FALLBACK_AVATAR;
         if (typeof raw === "string" && raw.startsWith("http")) return raw;
         const safeBase = apiHost.replace(/\/$/, "");
         const safePath = String(raw).replace(/^\/+/, "");
@@ -86,7 +88,7 @@ function Navbar() {
                     alt={currentUser?.name || currentUser?.fullName || "profile"}
                     className="w-8 h-8 rounded-full object-cover border border-indigo-50 bg-white"
                     onError={(e) => {
-                        e.currentTarget.src = profile;
+                        e.currentTarget.src = FALLBACK_AVATAR;
                     }}
                 />
             </header>
@@ -193,7 +195,7 @@ function Navbar() {
                         alt={currentUser?.name || currentUser?.fullName || "profile"}
                         className="w-10 h-10 rounded-full object-cover border border-indigo-50 bg-white"
                         onError={(e) => {
-                            e.currentTarget.src = profile;
+                            e.currentTarget.src = FALLBACK_AVATAR;
                         }}
                     />
                     <div className="mt-4 ml-2 mb-4">
